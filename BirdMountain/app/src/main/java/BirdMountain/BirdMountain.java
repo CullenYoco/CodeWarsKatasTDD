@@ -2,27 +2,24 @@ package BirdMountain;
 
 public class BirdMountain {
     public int peakHeight(char[][] mountain) {
-        return contains(mountain, '^') ? calculatePeakHeight(mountain): 0;
+        return calculatePeakHeight(mountain);
     }
 
     public int[][] calculateHeightArray(char[][] mountain) {
-        int heightArray[][] = new int[mountain.length][mountain[0].length];
-        initHeightArray(mountain, heightArray);
+        int heightArray[][] = initHeightArray(mountain);
         
         int currentHeight = -1;
-        while (contains(mountain, '^')) {
+        while (contains(heightArray, -1)) {
             currentHeight++;
             
-            updateCellsOfCurrentHeight(mountain, heightArray, currentHeight);
+            updateCellsOfCurrentHeight(heightArray, currentHeight);
         }
 
         return heightArray;
     }
 
     private int calculatePeakHeight(char[][] mountain) {
-        int heightArray[][] = calculateHeightArray(mountain);
-
-        return max(heightArray);
+        return max(calculateHeightArray(mountain));
     }
 
     private int max(int[][] heightArray) {
@@ -39,12 +36,11 @@ public class BirdMountain {
         return maxValue;
     }
 
-    private void updateCellsOfCurrentHeight(char[][] mountain, int[][] heightArray, int currentHeight) {
-        for (int i = 0; i < mountain.length; i++) {
-            for (int j = 0; j < mountain[i].length; j++) {
-                if (mountain[i][j] == '^') {
+    private void updateCellsOfCurrentHeight(int[][] heightArray, int currentHeight) {
+        for (int i = 0; i < heightArray.length; i++) {
+            for (int j = 0; j < heightArray[i].length; j++) {
+                if (heightArray[i][j] == -1) {
                     if (neighboursContainCurrentHeight(heightArray, currentHeight, i, j)) {
-                        mountain[i][j] = '@'; // Arbitrary Replacement
                         heightArray[i][j] = currentHeight + 1;
                     }
                 }
@@ -52,12 +48,16 @@ public class BirdMountain {
         }
     }
 
-    private void initHeightArray(char[][] mountain, int[][] heightArray) {
+    private int[][] initHeightArray(char[][] mountain) {
+        int heightArray[][] = new int[mountain.length][mountain[0].length];
+        
         for (int i = 0; i < heightArray.length; i++) {
             for (int j = 0; j < heightArray[i].length; j++) {
                 heightArray[i][j] = mountain[i][j] == '^' ? -1 : 0;
             }
         }
+
+        return heightArray;
     }
 
     private boolean neighboursContainCurrentHeight(int[][] heightArray, int currentHeight, int rowPos, int colPos) {
@@ -95,10 +95,10 @@ public class BirdMountain {
         return rowPos + i < heightArray.length && rowPos + i > -1;
     }
 
-    private boolean contains(char[][] mountain, char testChar) {
-        for (char[] mountainRow: mountain) {
-            for (char mountainCell: mountainRow) {
-                if (mountainCell == testChar) {
+    private boolean contains(int[][] heightArray, int testValue) {
+        for (int[] heightRow: heightArray) {
+            for (int heightCell: heightRow) {
+                if (heightCell == testValue) {
                     return true;
                 }
             }
