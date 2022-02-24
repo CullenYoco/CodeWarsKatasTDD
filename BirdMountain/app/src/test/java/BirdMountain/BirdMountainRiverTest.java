@@ -40,4 +40,18 @@ public class BirdMountainRiverTest {
 
         assertArrayEquals(new int[]{6, 0, 0, 0}, BirdMountainRiver.dryGround(terrain));
     }
+
+    @Test
+    public void basicMountainWithRiverTest() {
+        char[][] terrain = {
+            "      ".toCharArray(),
+            " ^^^^ ".toCharArray(),
+            " ^^^^ ".toCharArray(),
+            " ^^^^ ".toCharArray(),
+            " ^^^^ ".toCharArray(),
+            "  --  ".toCharArray()
+        };
+
+        assertArrayEquals(new int[]{34, 16, 4, 0}, BirdMountainRiver.dryGround(terrain));
+    }
 }
