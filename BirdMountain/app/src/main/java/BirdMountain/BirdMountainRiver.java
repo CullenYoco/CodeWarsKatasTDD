@@ -39,6 +39,8 @@ public class BirdMountainRiver {
             for (int j = 0; j < terrain[i].length; j++) {
                 if (terrain[i][j] != '-' && heightArray[i][j] > currentWaterHeight) {
                     count++;
+                } else {
+                    terrain[i][j] = '-';
                 }
             }
         }

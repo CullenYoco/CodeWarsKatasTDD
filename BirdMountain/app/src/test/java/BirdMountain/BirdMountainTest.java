@@ -18,6 +18,19 @@ class BirdMountainTest {
     }
 
     @Test
+    public void heightArrayZeroTest() {
+        char mountain[][] = new char[][] {
+            "   ".toCharArray(),
+            "   ".toCharArray(),
+            "   ".toCharArray(),
+        };
+
+        int expected[][] = new int[3][3];
+
+        assertArrayEquals(expected, bm.calculateHeightArray(mountain));
+    }
+
+    @Test
     public void peakHeightOneTest() {
         char mountain[][] = new char[][] {
             "   ".toCharArray(),
@@ -29,6 +42,20 @@ class BirdMountainTest {
     }
 
     @Test
+    public void heightArrayOneTest() {
+        char mountain[][] = new char[][] {
+            "   ".toCharArray(),
+            " ^ ".toCharArray(),
+            "   ".toCharArray(),
+        };
+
+        int expected[][] = new int[3][3];
+        expected[1][1] = 1;
+
+        assertArrayEquals(expected, bm.calculateHeightArray(mountain));
+    }
+
+    @Test
     public void peakHeightTwoTest() {
         char mountain[][] = new char[][] {
             "^^^".toCharArray(),
@@ -37,6 +64,23 @@ class BirdMountainTest {
         };
 
         assertEquals(2, bm.peakHeight(mountain));
+    }
+
+    @Test
+    public void heightArrayTwoTest() {
+        char mountain[][] = new char[][] {
+            "^^^".toCharArray(),
+            "^^^".toCharArray(),
+            "^^^".toCharArray(),
+        };
+
+        int expected[][] = {
+            {1, 1, 1},
+            {1, 2, 1},
+            {1, 1, 1}
+        };
+
+        assertArrayEquals(expected, bm.calculateHeightArray(mountain));
     }
 
     @Test
@@ -52,6 +96,31 @@ class BirdMountainTest {
         }; 
 
         assertEquals(3, bm.peakHeight(mountain));
+    }
+
+    @Test
+    public void heightArrayThreeTest() {
+        char[][] mountain = {
+            "^^^^^^        ".toCharArray(),
+            " ^^^^^^^^     ".toCharArray(),
+            "  ^^^^^^^     ".toCharArray(),
+            "  ^^^^^       ".toCharArray(),
+            "  ^^^^^^^^^^^ ".toCharArray(),
+            "  ^^^^^^      ".toCharArray(),
+            "  ^^^^        ".toCharArray()
+        };
+
+        int expected[][] = {
+            {1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 1, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 0},
+            {0, 0, 1, 2, 3, 3, 2, 1, 1, 0, 0, 0, 0, 0},
+            {0, 0, 1, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 1, 2, 3, 3, 2, 1, 1, 1, 1, 1, 1, 0},
+            {0, 0, 1, 2, 2, 2, 1, 1, 0, 0, 0, 0, 0, 0},
+            {0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0}
+        };
+
+        assertArrayEquals(expected, bm.calculateHeightArray(mountain));
     }
 
 
