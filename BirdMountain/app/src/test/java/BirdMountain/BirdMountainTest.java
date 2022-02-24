@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BirdMountainTest {
-    private BirdMountain bm = new BirdMountain();
-
     @Test
     public void peakHeightZeroTest() {
         char mountain[][] = new char[][] {
@@ -14,7 +12,7 @@ class BirdMountainTest {
             "   ".toCharArray(),
         };
 
-        assertEquals(0, bm.peakHeight(mountain));
+        assertEquals(0, BirdMountain.peakHeight(mountain));
     }
 
     @Test
@@ -27,7 +25,7 @@ class BirdMountainTest {
 
         int expected[][] = new int[3][3];
 
-        assertArrayEquals(expected, bm.calculateHeightArray(mountain));
+        assertArrayEquals(expected, BirdMountain.calculateHeightArray(mountain));
     }
 
     @Test
@@ -38,7 +36,7 @@ class BirdMountainTest {
             "   ".toCharArray(),
         };
 
-        assertEquals(1, bm.peakHeight(mountain));
+        assertEquals(1, BirdMountain.peakHeight(mountain));
     }
 
     @Test
@@ -52,7 +50,7 @@ class BirdMountainTest {
         int expected[][] = new int[3][3];
         expected[1][1] = 1;
 
-        assertArrayEquals(expected, bm.calculateHeightArray(mountain));
+        assertArrayEquals(expected, BirdMountain.calculateHeightArray(mountain));
     }
 
     @Test
@@ -63,7 +61,7 @@ class BirdMountainTest {
             "^^^".toCharArray(),
         };
 
-        assertEquals(2, bm.peakHeight(mountain));
+        assertEquals(2, BirdMountain.peakHeight(mountain));
     }
 
     @Test
@@ -80,7 +78,7 @@ class BirdMountainTest {
             {1, 1, 1}
         };
 
-        assertArrayEquals(expected, bm.calculateHeightArray(mountain));
+        assertArrayEquals(expected, BirdMountain.calculateHeightArray(mountain));
     }
 
     @Test
@@ -95,7 +93,7 @@ class BirdMountainTest {
             "  ^^^^        ".toCharArray()
         }; 
 
-        assertEquals(3, bm.peakHeight(mountain));
+        assertEquals(3, BirdMountain.peakHeight(mountain));
     }
 
     @Test
@@ -120,7 +118,7 @@ class BirdMountainTest {
             {0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0}
         };
 
-        assertArrayEquals(expected, bm.calculateHeightArray(mountain));
+        assertArrayEquals(expected, BirdMountain.calculateHeightArray(mountain));
     }
 
 
@@ -134,7 +132,7 @@ class BirdMountainTest {
         "      ".toCharArray(),
         "      ".toCharArray()
         };      
-        assertEquals(0, bm.peakHeight(mountain));
+        assertEquals(0, BirdMountain.peakHeight(mountain));
     }    
     
     @Test
@@ -145,7 +143,7 @@ class BirdMountainTest {
         "           ".toCharArray(),
         "      ^    ".toCharArray()
         };      
-        assertEquals(1, bm.peakHeight(mountain));
+        assertEquals(1, BirdMountain.peakHeight(mountain));
     }    
 
     @Test
@@ -155,7 +153,7 @@ class BirdMountainTest {
         "  ^^  ".toCharArray(),
         "      ".toCharArray()
         };      
-        assertEquals(1, bm.peakHeight(mountain));
+        assertEquals(1, BirdMountain.peakHeight(mountain));
     }    
     
     @Test
@@ -165,7 +163,7 @@ class BirdMountainTest {
         " ^^^ ".toCharArray(),
         "^^^^^".toCharArray()
         };      
-        assertEquals(2, bm.peakHeight(mountain));
+        assertEquals(2, BirdMountain.peakHeight(mountain));
     }      
     
     @Test
@@ -183,7 +181,7 @@ class BirdMountainTest {
         "     ^^^^^^^".toCharArray(),
         "     ^^^^^^^".toCharArray()        
         };      
-        assertEquals(4, bm.peakHeight(mountain));
+        assertEquals(4, BirdMountain.peakHeight(mountain));
     }      
     
     @Test
@@ -201,7 +199,7 @@ class BirdMountainTest {
         "^^^    ^^ ^^".toCharArray(),
         "     ^^^^^^^".toCharArray()        
         };      
-        assertEquals(2, bm.peakHeight(mountain));
+        assertEquals(2, BirdMountain.peakHeight(mountain));
     }      
     
     @Test
@@ -222,7 +220,7 @@ class BirdMountainTest {
         "    ^^^^^  ".toCharArray(),
         "      ^^   ".toCharArray()
         };      
-        assertEquals(5, bm.peakHeight(mountain));
+        assertEquals(5, BirdMountain.peakHeight(mountain));
     }          
     
     @Test
@@ -250,7 +248,7 @@ class BirdMountainTest {
         "^^^^^^^^^^^^^^^^^^^^^".toCharArray(),
         "^^^^^^^^^^^^^^^^^^^^^".toCharArray(),
         };      
-        assertEquals(11, bm.peakHeight(mountain));
+        assertEquals(11, BirdMountain.peakHeight(mountain));
     }          
     
     @Test
@@ -268,6 +266,6 @@ class BirdMountainTest {
         "    ^^^^^^^^^^^^^    ".toCharArray(),
         "      ^^^^^^^^^      ".toCharArray(),
         };      
-        assertEquals(4, bm.peakHeight(mountain));
+        assertEquals(4, BirdMountain.peakHeight(mountain));
     }  
 }

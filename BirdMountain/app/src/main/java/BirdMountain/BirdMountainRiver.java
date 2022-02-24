@@ -1,12 +1,8 @@
 package BirdMountain;
 
-import java.util.Arrays;
-
 public class BirdMountainRiver {
-    public int[] dryGround(char[][] terrain) {
-        int heightArray[][] = (new BirdMountain()).calculateHeightArray(terrain);
-
-        System.out.println(Arrays.deepToString(heightArray));
+    public static int[] dryGround(char[][] terrain) {
+        int heightArray[][] = BirdMountain.calculateHeightArray(terrain);
 
         double currentWaterHeight = -0.5;
         int dryValues[] = new int[4];
@@ -21,7 +17,7 @@ public class BirdMountainRiver {
         return dryValues;
     }
 
-    private boolean containsWater(char[][] terrain) {
+    private static boolean containsWater(char[][] terrain) {
         for (char[] terrainRow: terrain) {
             for (char terrainCell: terrainRow) {
                 if (terrainCell == '-') {
@@ -33,7 +29,7 @@ public class BirdMountainRiver {
         return false;
     }
 
-    private int calculateDrySpots(char[][] terrain, int[][] heightArray, double currentWaterHeight) {
+    private static int calculateDrySpots(char[][] terrain, int[][] heightArray, double currentWaterHeight) {
         int count = 0;
         for (int i = 0; i < terrain.length; i++) {
             for (int j = 0; j < terrain[i].length; j++) {

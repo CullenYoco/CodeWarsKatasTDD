@@ -1,11 +1,11 @@
 package BirdMountain;
 
 public class BirdMountain {
-    public int peakHeight(char[][] mountain) {
+    public static int peakHeight(char[][] mountain) {
         return calculatePeakHeight(mountain);
     }
 
-    public int[][] calculateHeightArray(char[][] mountain) {
+    public static int[][] calculateHeightArray(char[][] mountain) {
         int heightArray[][] = initHeightArray(mountain);
         
         int currentHeight = -1;
@@ -18,11 +18,11 @@ public class BirdMountain {
         return heightArray;
     }
 
-    private int calculatePeakHeight(char[][] mountain) {
+    private static int calculatePeakHeight(char[][] mountain) {
         return max(calculateHeightArray(mountain));
     }
 
-    private int max(int[][] heightArray) {
+    private static int max(int[][] heightArray) {
         int maxValue = -1;
 
         for (int[] heightRow: heightArray) {
@@ -36,7 +36,7 @@ public class BirdMountain {
         return maxValue;
     }
 
-    private void updateCellsOfCurrentHeight(int[][] heightArray, int currentHeight) {
+    private static void updateCellsOfCurrentHeight(int[][] heightArray, int currentHeight) {
         for (int i = 0; i < heightArray.length; i++) {
             for (int j = 0; j < heightArray[i].length; j++) {
                 if (heightArray[i][j] == -1) {
@@ -48,7 +48,7 @@ public class BirdMountain {
         }
     }
 
-    private int[][] initHeightArray(char[][] mountain) {
+    private static int[][] initHeightArray(char[][] mountain) {
         int heightArray[][] = new int[mountain.length][mountain[0].length];
         
         for (int i = 0; i < heightArray.length; i++) {
@@ -60,7 +60,7 @@ public class BirdMountain {
         return heightArray;
     }
 
-    private boolean neighboursContainCurrentHeight(int[][] heightArray, int currentHeight, int rowPos, int colPos) {
+    private static boolean neighboursContainCurrentHeight(int[][] heightArray, int currentHeight, int rowPos, int colPos) {
         for (int i = -1; i < 2; i +=2) {
             boolean hasPotentialYNeighbour = isYNeighbourOnBoard(heightArray, rowPos, i);
             boolean hasPotentialXNeighbour = isXNeighbourOnBoard(heightArray, colPos, i);
@@ -87,15 +87,15 @@ public class BirdMountain {
         return false;
     }
 
-    private boolean isXNeighbourOnBoard(int[][] heightArray, int colPos, int i) {
+    private static boolean isXNeighbourOnBoard(int[][] heightArray, int colPos, int i) {
         return colPos + i < heightArray[0].length && colPos + i > -1;
     }
 
-    private boolean isYNeighbourOnBoard(int[][] heightArray, int rowPos, int i) {
+    private static boolean isYNeighbourOnBoard(int[][] heightArray, int rowPos, int i) {
         return rowPos + i < heightArray.length && rowPos + i > -1;
     }
 
-    private boolean contains(int[][] heightArray, int testValue) {
+    private static boolean contains(int[][] heightArray, int testValue) {
         for (int[] heightRow: heightArray) {
             for (int heightCell: heightRow) {
                 if (heightCell == testValue) {

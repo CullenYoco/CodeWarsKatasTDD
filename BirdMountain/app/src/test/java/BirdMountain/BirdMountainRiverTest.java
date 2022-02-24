@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import org.junit.jupiter.api.Test;
 
 public class BirdMountainRiverTest {
-    BirdMountainRiver bmr = new BirdMountainRiver();
-
     @Test
     public void noRiverGroundLevelTest() {
         char[][] terrain = {
@@ -14,7 +12,7 @@ public class BirdMountainRiverTest {
             "   ".toCharArray() 
         };
 
-        assertArrayEquals(new int[]{9, 9, 9, 9}, bmr.dryGround(terrain));
+        assertArrayEquals(new int[]{9, 9, 9, 9}, BirdMountainRiver.dryGround(terrain));
     }
 
     @Test
@@ -29,7 +27,7 @@ public class BirdMountainRiverTest {
             "  ^^^^        ".toCharArray()
         }; 
 
-        assertArrayEquals(new int[]{98, 98, 98, 98}, bmr.dryGround(terrain));
+        assertArrayEquals(new int[]{98, 98, 98, 98}, BirdMountainRiver.dryGround(terrain));
     }
 
     @Test
@@ -40,6 +38,6 @@ public class BirdMountainRiverTest {
             "   ".toCharArray() 
         };
 
-        assertArrayEquals(new int[]{6, 0, 0, 0}, bmr.dryGround(terrain));
+        assertArrayEquals(new int[]{6, 0, 0, 0}, BirdMountainRiver.dryGround(terrain));
     }
 }
