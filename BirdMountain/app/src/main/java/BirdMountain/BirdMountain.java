@@ -5,6 +5,20 @@ public class BirdMountain {
         return contains(mountain, '^') ? calculatePeakHeight(mountain): 0;
     }
 
+    public int[][] calculateHeightArray(char[][] mountain) {
+        int heightArray[][] = new int[mountain.length][mountain[0].length];
+        initHeightArray(mountain, heightArray);
+        
+        int currentHeight = -1;
+        while (contains(mountain, '^')) {
+            currentHeight++;
+            
+            updateCellsOfCurrentHeight(mountain, heightArray, currentHeight);
+        }
+
+        return heightArray;
+    }
+
     private int calculatePeakHeight(char[][] mountain) {
         int heightArray[][] = new int[mountain.length][mountain[0].length];
         initHeightArray(mountain, heightArray);
