@@ -20,17 +20,23 @@ public class BirdMountain {
     }
 
     private int calculatePeakHeight(char[][] mountain) {
-        int heightArray[][] = new int[mountain.length][mountain[0].length];
-        initHeightArray(mountain, heightArray);
-        
-        int currentHeight = -1;
-        while (contains(mountain, '^')) {
-            currentHeight++;
-            
-            updateCellsOfCurrentHeight(mountain, heightArray, currentHeight);
+        int heightArray[][] = calculateHeightArray(mountain);
+
+        return max(heightArray);
+    }
+
+    private int max(int[][] heightArray) {
+        int maxValue = -1;
+
+        for (int[] heightRow: heightArray) {
+            for (int heightCell: heightRow) {
+                if (heightCell > maxValue) {
+                    maxValue = heightCell;
+                }
+            }
         }
 
-        return currentHeight + 1;
+        return maxValue;
     }
 
     private void updateCellsOfCurrentHeight(char[][] mountain, int[][] heightArray, int currentHeight) {
