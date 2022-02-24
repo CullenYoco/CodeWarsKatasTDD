@@ -2,63 +2,62 @@ package BirdMountain;
 
 public class BirdMountain {
     public int peakHeight(char[][] mountain) {
-        if (contains(mountain, '^')) {
-            return calculatePeakHeight(mountain);
-        }
-
-        return 0;
+        return contains(mountain, '^') ? calculatePeakHeight(mountain): 0;
     }
 
     private int calculatePeakHeight(char[][] mountain) {
         int heightArray[][] = new int[mountain.length][mountain[0].length];
-        for (int i = 0; i < heightArray.length; i++) {
-            for (int j = 0; j < heightArray[i].length; j++) {
-                if (mountain[i][j] != '^') {
-                    heightArray[i][j] = 0;
-                } else {                
-                    heightArray[i][j] = -1;
-                }
-            }
-        }
+        initHeightArray(mountain, heightArray);
         
         int currentHeight = -1;
         while (contains(mountain, '^')) {
             currentHeight++;
             
-            
-            for (int i = 0; i < mountain.length; i++) {
-                for (int j = 0; j < mountain[i].length; j++) {
-                    if (mountain[i][j] == '^') {
-                        if (neighboursContainCurrentHeight(heightArray, currentHeight, i, j)) {
-                            mountain[i][j] = '@'; // Arbitrary Replacement
-                            heightArray[i][j] = currentHeight + 1;
-                        }
-                    }
-                }
-            }
+            updateCellsOfCurrentHeight(mountain, heightArray, currentHeight);
         }
-
 
         return currentHeight + 1;
     }
 
+    private void updateCellsOfCurrentHeight(char[][] mountain, int[][] heightArray, int currentHeight) {
+        for (int i = 0; i < mountain.length; i++) {
+            for (int j = 0; j < mountain[i].length; j++) {
+                if (mountain[i][j] == '^') {
+                    if (neighboursContainCurrentHeight(heightArray, currentHeight, i, j)) {
+                        mountain[i][j] = '@'; // Arbitrary Replacement
+                        heightArray[i][j] = currentHeight + 1;
+                    }
+                }
+            }
+        }
+    }
+
+    private void initHeightArray(char[][] mountain, int[][] heightArray) {
+        for (int i = 0; i < heightArray.length; i++) {
+            for (int j = 0; j < heightArray[i].length; j++) {
+                heightArray[i][j] = mountain[i][j] == '^' ? -1 : 0;
+            }
+        }
+    }
+
     private boolean neighboursContainCurrentHeight(int[][] heightArray, int currentHeight, int rowPos, int colPos) {
         for (int i = -1; i < 2; i +=2) {
-            if (rowPos + i < heightArray.length && rowPos + i > -1) {
+            boolean hasPotentialYNeighbour = isYNeighbourOnBoard(heightArray, rowPos, i);
+            boolean hasPotentialXNeighbour = isXNeighbourOnBoard(heightArray, colPos, i);
+
+            if (hasPotentialYNeighbour) {
                 if (heightArray[rowPos + i][colPos] == currentHeight) {
-                    return true;
-                }
-            } else {
-                if (currentHeight == 0) {
                     return true;
                 }
             }
 
-            if (colPos + i < heightArray[0].length && colPos + i > -1) {
+            if (hasPotentialXNeighbour) {
                 if (heightArray[rowPos][colPos + i] == currentHeight) {
                     return true;
                 }
-            } else {
+            }
+
+            if (!(hasPotentialYNeighbour && hasPotentialXNeighbour)) {
                 if (currentHeight == 0) {
                     return true;
                 }
@@ -66,6 +65,14 @@ public class BirdMountain {
         }
 
         return false;
+    }
+
+    private boolean isXNeighbourOnBoard(int[][] heightArray, int colPos, int i) {
+        return colPos + i < heightArray[0].length && colPos + i > -1;
+    }
+
+    private boolean isYNeighbourOnBoard(int[][] heightArray, int rowPos, int i) {
+        return rowPos + i < heightArray.length && rowPos + i > -1;
     }
 
     private boolean contains(char[][] mountain, char testChar) {
